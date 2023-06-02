@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, View, SafeAreaView } from 'react-native'
 
-export default function App() {
+import CurrentWeather from './src/screens/CurrentWeather'
+import UpcomingWeather from './src/screens/UpcomingWeather'
+import City from './src/screens/City'
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
+const Tab = createBottomTabNavigator()
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <SafeAreaView style={styles.wrapper}>
+      <NavigationContainer>
+        <Tab.Navigator>
+            <Tab.Screen name={'Current'} component={CurrentWeather} />
+            <Tab.Screen name={'Forecast'} component={UpcomingWeather} />
+            <Tab.Screen name={'City'} component={City} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    backgroundColor: '#ccc',
+  }
+})
+
+export default App
