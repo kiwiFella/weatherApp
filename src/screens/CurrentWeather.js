@@ -1,12 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import { weatherType } from '../utilities/WeatherTypes'
 
 const CurrentWeather = () => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
-        <Ionicons name="sunny-sharp" style={styles.icon} />
+        <Ionicons name={weatherType['Thunderstorm'].icon} style={styles.icon} />
         <Text style={styles.current}>Current Weather</Text>
         <Text style={styles.temp}>21°</Text>
         <Text style={styles.feels}>Feels like 19°</Text>
@@ -14,7 +15,7 @@ const CurrentWeather = () => {
       </View>
       <View style={styles.textWrapper}>
         <Text style={styles.description}>It&apos;s Sunny</Text>
-        <Text style={styles.message}>Perfect t-shirt weather</Text>
+        <Text style={styles.message}>{weatherType['Thunderstorm'].message}</Text>
       </View>
     </SafeAreaView>
   )
