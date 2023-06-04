@@ -1,25 +1,29 @@
 import React from 'react'
 import { StyleSheet, View, Text, ImageBackground, StatusBar } from 'react-native'
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'
+import moment from 'moment'
 
-const City = () => {
+const City = ({weatherData}) => {
+
+  const {name, country, population, sunrise, sunset} = weatherData
+
   return (
     // <SafeAreaView style={styles.wrapper}>
       <ImageBackground style={styles.background} source={require('../../assets/img/cityBackground.jpg')} >
         <View style={styles.transparentOverlay}>
           
           <View style={styles.container}>
-            <Text style={[styles.city, styles.text]}>Wellington</Text>
-            <Text style={[styles.country, styles.text]}>New Zealand</Text>
+            <Text style={[styles.city, styles.text]}>{name}</Text>
+            <Text style={[styles.country, styles.text]}>{country}</Text>
 
             <Ionicons style={styles.populationIcon} name="ios-people-outline" size={50} />
             <Text style={[styles.population, styles.text]}>Population:</Text>
-            <Text style={[styles.population, styles.text]}>66,000</Text>
+            <Text style={[styles.population, styles.text]}>{population}</Text>
             <View style={styles.sunriseset}>
               <Ionicons name="ios-sunny" size={30} />
-              <Text style={[styles.sunrisesetText]}>8:01am</Text>
+              <Text style={[styles.sunrisesetText]}> {moment(sunrise).format('h:mm:ss a')} </Text>
               <Ionicons name="ios-moon" size={30} />
-              <Text style={[styles.sunrisesetText]}>6:55pm</Text>
+              <Text style={[styles.sunrisesetText]}> {moment(sunset).format('h:mm:ss a')} </Text>
             </View>
           </View>
         </View>

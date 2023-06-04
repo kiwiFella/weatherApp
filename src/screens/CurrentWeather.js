@@ -3,19 +3,22 @@ import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { weatherType } from '../utilities/WeatherTypes'
 
-const CurrentWeather = () => {
+const CurrentWeather = ({weatherData}) => {
+const { main:{ temp, feels_like, temp_max, temp_min}, weather} = weatherData
+const weatherCondition = weather[0]?.main
+
   return (
-    <SafeAreaView style={styles.wrapper}>
+    <SafeAreaView style={[styles.wrapper, {backgroundColor: weatherType[weatherCondition]?.backgroundColor}]}>
       <View style={styles.container}>
-        <Ionicons name={weatherType['Thunderstorm'].icon} style={styles.icon} />
+        <Ionicons name={weatherType[weatherCondition]?.icon} style={styles.icon} />
         <Text style={styles.current}>Current Weather</Text>
-        <Text style={styles.temp}>21°</Text>
-        <Text style={styles.feels}>Feels like 19°</Text>
-        <Text style={styles.highlow}>High: 22° | Low: 15°</Text>
+        <Text style={styles.temp}>{temp}°</Text>
+        <Text style={styles.feels}>{`Feels like ${feels_like}`}°</Text>
+        <Text style={styles.highlow}>{`High: ${temp_max}° | Low: ${temp_min}°`}</Text>
       </View>
       <View style={styles.textWrapper}>
-        <Text style={styles.description}>It&apos;s Sunny</Text>
-        <Text style={styles.message}>{weatherType['Thunderstorm'].message}</Text>
+        <Text style={styles.description}>{weather[0]?.description}</Text>
+        <Text style={styles.message}>{weatherType[weatherCondition]?.message}</Text>
       </View>
     </SafeAreaView>
   )

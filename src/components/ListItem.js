@@ -1,15 +1,18 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import moment from 'moment'
+import { weatherType } from '../utilities/WeatherTypes'
+
 
 const ListItem = (props) => {
-    const {dt_text, max, min, condition} = props
+    const {dt_txt, max, min, condition} = props
     return (
         <View style={styles.item}>
-            <Ionicons name={'cloud-outline'} style={styles.icon} />
-            <Text style={styles.date}>{dt_text}</Text>
-            <Text style={styles.temp}>{max}° </Text>
-            <Text style={styles.temp}>{min}°</Text>
+            <Ionicons name={weatherType[condition]?.icon} style={styles.icon} />
+            <Text style={styles.date}>{moment(dt_txt).format('dddd') + " " + moment(dt_txt).format('h:mm a')}</Text>
+            <Text style={styles.temp}>{`${Math.round(max)}°`} </Text>
+            <Text style={styles.temp}>{`${Math.round(min)}°`}</Text>
         </View>
     )
 }
